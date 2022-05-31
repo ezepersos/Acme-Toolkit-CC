@@ -29,3 +29,9 @@ administrator.dashboard.form.label.minimum-retail-price = Minimum budget patrona
 administrator.dashboard.form.label.maximum-retail-price = Maximum budget patronage
 administrator.dashboard.form.label.number.patronages = Patronage's number
 administrator.dashboard.form.description-table = Control panel data
+
+administrator.dashboard.form.label.ratio-artifacts = Artifact Ratio
+administrator.dashboard.form.label.average-artifacts = Average budget artefacts
+administrator.dashboard.form.label.deviation-artifacts = Deviation budget artefacts
+administrator.dashboard.form.label.minimum-artifacts = Minimum budget artefacts
+administrator.dashboard.form.label.maximum-artifacts = Maximum budget artefacts

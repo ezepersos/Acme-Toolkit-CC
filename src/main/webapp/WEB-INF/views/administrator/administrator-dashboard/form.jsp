@@ -157,9 +157,55 @@
 				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
 			</c:forEach>
 		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.ratio-artifacts"/>
+		</th>
+		<td>
+			<c:forEach items="${ratioOfArtifacts}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.average-artifacts"/>
+		</th>
+		<td>
+			<c:forEach items="${averageOfArtifactsByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.deviation-artifacts"/>
+		</th>
+		<td>
+			<c:forEach items="${deviationOfArtifactsByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.minimum-artifacts"/>
+		</th>
+		<td>
+			<c:forEach items="${minimumArtifactsByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.maximum-artifacts"/>
+		</th>
+		<td>
+			<c:forEach items="${maximumArtifactsByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
 	</tr>
 
 </table>
+
 
 
 

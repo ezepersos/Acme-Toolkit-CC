@@ -29,3 +29,9 @@ administrator.dashboard.form.label.minimum-retail-price = Presupuesto mínimo de
 administrator.dashboard.form.label.maximum-retail-price = Presupuesto máximo de patrocinio
 administrator.dashboard.form.label.number.patronages = Número de patrocinios
 administrator.dashboard.form.description-table = Datos del panel de control
+
+administrator.dashboard.form.label.ratio-artifacts = Ratio de artefactos
+administrator.dashboard.form.label.average-artifacts = Media presupuesto de artefactos
+administrator.dashboard.form.label.deviation-artifacts = Desviación presupuesto de artefactos
+administrator.dashboard.form.label.minimum-artifacts = Minimo presupuesto de artefactos
+administrator.dashboard.form.label.maximum-artifacts = Máximo presupuesto de artefactos

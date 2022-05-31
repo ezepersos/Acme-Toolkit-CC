@@ -52,7 +52,7 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		request.unbind(entity, model, "totalNumberOfComponents", "averageRetailPriceOfComponentsByTechnologyAndCurrency", "deviationRetailPriceOfComponentsByTechnologyAndCurrency",
 			"minimumRetailPriceOfComponentsByTechnologyAndCurrency", "maximumRetailPriceOfComponentsByTechnologyAndCurrency", "totalNumberOfTools",
 			"averageRetailPriceOfToolsByCurrency", "deviationRetailPriceOfToolsByCurrency", "minimumRetailPriceOfToolsByCurrency", "maximumRetailPriceOfToolsByCurrency",
-			"totalNumberOfPatronagesByStatus", "averagePatronagesBudgetByStats", "deviationPatronagesBudgetByStats", "minimumPatronagesBudgetByStats", "maximumPatronagesBudgetByStats");
+			"totalNumberOfPatronagesByStatus", "averagePatronagesBudgetByStats", "deviationPatronagesBudgetByStats", "minimumPatronagesBudgetByStats", "maximumPatronagesBudgetByStats", "ratioOfArtifacts", "averageOfArtifactsByCurrency", "deviationOfArtifactsByCurrency","minimumArtifactsByCurrency", "maximumArtifactsByCurrency");
 	}
 
 
@@ -74,7 +74,11 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		final Map<Pair<String, String>, Double> dvaRtBCT = new HashMap<>();
 		final Map<Pair<String, String>, Double> minRtBCT = new HashMap<>();
 		final Map<Pair<String, String>, Double> maxRtBCT = new HashMap<>();
-		
+		final Map<String, Integer> mapTotalNumberArtifacts= new HashMap<>();
+		final Map<String, Double> avrArtifacts = new HashMap<>();
+		final Map<String, Double> dvaArtifacts = new HashMap<>();
+		final Map<String, Double>  minArtifacts = new HashMap<>();
+		final Map<String, Double> maxArtifacts = new HashMap<>();
 		for(final PatronageStatus type: PatronageStatus.values()) {
 			for(final Object[] obj: this.repository.operationsPatronagesByStatus(type)) {
 				mapTotalNumberPI.put(type, Integer.valueOf(obj[0].toString()));
@@ -98,6 +102,13 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 			minRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[4].toString()));
 			maxRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[5].toString()));
 		}
+		for(final Object[] obj: this.repository.operationsBudgetsByArtifact()) {
+			mapTotalNumberArtifacts.put(obj[0].toString(), Integer.valueOf(obj[1].toString()));
+			avrArtifacts.put(obj[0].toString(), Double.valueOf(obj[2].toString()));
+			dvaArtifacts.put(obj[0].toString(), Double.valueOf(obj[3].toString()));
+			minArtifacts.put(obj[0].toString(), Double.valueOf(obj[4].toString()));
+			maxArtifacts.put(obj[0].toString(), Double.valueOf(obj[4].toString()));
+		}
 		
 		result.setTotalNumberOfTools(this.repository.totalItems(ItemType.TOOL));
 		result.setTotalNumberOfComponents(this.repository.totalItems(ItemType.COMPONENT));
@@ -114,6 +125,11 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		result.setDeviationPatronagesBudgetByStats(mapDeviationPD);
 		result.setMinimumPatronagesBudgetByStats(mapMinumumPD);
 		result.setMaximumPatronagesBudgetByStats(mapMaximumPD);
+		result.setRatioOfArtifacts(mapTotalNumberArtifacts);
+		result.setAverageOfArtifactsByCurrency(avrArtifacts);
+		result.setDeviationOfArtifactsByCurrency(dvaArtifacts);
+		result.setMinimumArtifactsByCurrency(minArtifacts);
+		result.setMaximumArtifactsByCurrency(maxArtifacts);
 		return result;
 	}
 	
