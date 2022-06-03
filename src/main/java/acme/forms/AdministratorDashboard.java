@@ -34,6 +34,14 @@ public class AdministratorDashboard implements Serializable {
 	private Map<PatronageStatus, Double>		deviationPatronagesBudgetByStats;
 	private Map<PatronageStatus, Double>		minimumPatronagesBudgetByStats;
 	private Map<PatronageStatus, Double>		maximumPatronagesBudgetByStats;
+	private Map<String, Double>					ratioChimpumByCurrency;
+	private Map<String, Double>					averageChimpumByCurrency;
+	private Map<String, Double>					deviationChimpumByCurrency;
+	private Map<String, Double>					minimumChimpumByCurrency;
+	private Map<String, Double>					maximumChimpumByCurrency;
+	
+	
+
 	
 	
 	// Derived attributes -----------------------------------------------------

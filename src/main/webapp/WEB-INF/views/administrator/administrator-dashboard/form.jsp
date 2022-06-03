@@ -157,8 +157,52 @@
 				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
 			</c:forEach>
 		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.ratio-chimpum"/>
+		</th>
+		<td>
+			<c:forEach items="${ratioChimpumByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.average-chimpum"/>
+		</th>
+		<td>
+			<c:forEach items="${averageChimpumByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.deviation-chimpum"/>
+		</th>
+		<td>
+			<c:forEach items="${deviationChimpumByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.minimum-budget-chimpum"/>
+		</th>
+		<td>
+			<c:forEach items="${minimumChimpumByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
+	</tr><tr>
+		<th scope="row">
+			<acme:message code="administrator.dashboard.form.label.maximum-budget-chimpum"/>
+		</th>
+		<td>
+			<c:forEach items="${maximumChimpumByCurrency}" var="entry">
+				${entry.key} = <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${entry.value}"/><br>
+			</c:forEach>
+		</td>
 	</tr>
-
 </table>
 
 

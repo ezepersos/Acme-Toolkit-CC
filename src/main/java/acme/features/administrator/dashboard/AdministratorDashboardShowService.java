@@ -36,7 +36,6 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 	@Autowired
 	protected AdministratorDashboardRepository repository;
 
-
 	@Override
 	public boolean authorise(final Request<AdministratorDashboard> request) {
 		assert request != null;
@@ -45,16 +44,23 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 	}
 
 	@Override
-	public void unbind(final Request<AdministratorDashboard> request, final AdministratorDashboard entity, final Model model) {
+	public void unbind(final Request<AdministratorDashboard> request, final AdministratorDashboard entity,
+			final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "totalNumberOfComponents", "averageRetailPriceOfComponentsByTechnologyAndCurrency", "deviationRetailPriceOfComponentsByTechnologyAndCurrency",
-			"minimumRetailPriceOfComponentsByTechnologyAndCurrency", "maximumRetailPriceOfComponentsByTechnologyAndCurrency", "totalNumberOfTools",
-			"averageRetailPriceOfToolsByCurrency", "deviationRetailPriceOfToolsByCurrency", "minimumRetailPriceOfToolsByCurrency", "maximumRetailPriceOfToolsByCurrency",
-			"totalNumberOfPatronagesByStatus", "averagePatronagesBudgetByStats", "deviationPatronagesBudgetByStats", "minimumPatronagesBudgetByStats", "maximumPatronagesBudgetByStats");
+		request.unbind(entity, model, "totalNumberOfComponents",
+				"averageRetailPriceOfComponentsByTechnologyAndCurrency",
+				"deviationRetailPriceOfComponentsByTechnologyAndCurrency",
+				"minimumRetailPriceOfComponentsByTechnologyAndCurrency",
+				"maximumRetailPriceOfComponentsByTechnologyAndCurrency", "totalNumberOfTools",
+				"averageRetailPriceOfToolsByCurrency", "deviationRetailPriceOfToolsByCurrency",
+				"minimumRetailPriceOfToolsByCurrency", "maximumRetailPriceOfToolsByCurrency",
+				"totalNumberOfPatronagesByStatus", "averagePatronagesBudgetByStats", "deviationPatronagesBudgetByStats",
+				"minimumPatronagesBudgetByStats", "maximumPatronagesBudgetByStats", "ratioChimpumByCurrency",
+				"averageChimpumByCurrency", "deviationChimpumByCurrency", "minimumChimpumByCurrency",
+				"maximumChimpumByCurrency");
 	}
-
 
 	@Override
 	public AdministratorDashboard findOne(final Request<AdministratorDashboard> request) {
@@ -74,9 +80,14 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		final Map<Pair<String, String>, Double> dvaRtBCT = new HashMap<>();
 		final Map<Pair<String, String>, Double> minRtBCT = new HashMap<>();
 		final Map<Pair<String, String>, Double> maxRtBCT = new HashMap<>();
-		
-		for(final PatronageStatus type: PatronageStatus.values()) {
-			for(final Object[] obj: this.repository.operationsPatronagesByStatus(type)) {
+		final Map<String, Double> ratioChBC = new HashMap<>();
+		final Map<String, Double> avrChBC = new HashMap<>();
+		final Map<String, Double> dvaChBC = new HashMap<>();
+		final Map<String, Double> minChBC = new HashMap<>();
+		final Map<String, Double> maxChBC = new HashMap<>();
+
+		for (final PatronageStatus type : PatronageStatus.values()) {
+			for (final Object[] obj : this.repository.operationsPatronagesByStatus(type)) {
 				mapTotalNumberPI.put(type, Integer.valueOf(obj[0].toString()));
 				mapAveragePD.put(type, Double.valueOf(obj[1].toString()));
 				mapDeviationPD.put(type, Double.valueOf(obj[2].toString()));
@@ -84,21 +95,28 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 				mapMaximumPD.put(type, Double.valueOf(obj[4].toString()));
 			}
 		}
-		
-		for(final Object[] obj: this.repository.operationsRetailPriceItemsByC(ItemType.TOOL)) {
+
+		for (final Object[] obj : this.repository.operationsRetailPriceItemsByC(ItemType.TOOL)) {
 			avrRtBC.put(obj[0].toString(), Double.valueOf(obj[1].toString()));
 			dvaRtBC.put(obj[0].toString(), Double.valueOf(obj[2].toString()));
 			minRtBC.put(obj[0].toString(), Double.valueOf(obj[3].toString()));
 			maxRtBC.put(obj[0].toString(), Double.valueOf(obj[4].toString()));
 		}
-		
-		for(final Object[] obj: this.repository.operationsRetailPriceItemsByTC(ItemType.TOOL)) {
+
+		for (final Object[] obj : this.repository.operationsRetailPriceItemsByTC(ItemType.TOOL)) {
 			avrRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[2].toString()));
 			dvaRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[3].toString()));
 			minRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[4].toString()));
 			maxRtBCT.put(Pair.of(obj[0].toString(), obj[1].toString()), Double.valueOf(obj[5].toString()));
 		}
-		
+		for (final Object[] obj : this.repository.operationsByChimpumByCurrency()) {
+			ratioChBC.put(obj[0].toString(), Double.valueOf(obj[1].toString()));
+			avrChBC.put(obj[0].toString(), Double.valueOf(obj[2].toString()));
+			dvaChBC.put(obj[0].toString(), Double.valueOf(obj[3].toString()));
+			minChBC.put(obj[0].toString(), Double.valueOf(obj[4].toString()));
+			maxChBC.put(obj[0].toString(), Double.valueOf(obj[5].toString()));
+		}
+
 		result.setTotalNumberOfTools(this.repository.totalItems(ItemType.TOOL));
 		result.setTotalNumberOfComponents(this.repository.totalItems(ItemType.COMPONENT));
 		result.setAverageRetailPriceOfComponentsByTechnologyAndCurrency(avrRtBCT);
@@ -114,10 +132,11 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		result.setDeviationPatronagesBudgetByStats(mapDeviationPD);
 		result.setMinimumPatronagesBudgetByStats(mapMinumumPD);
 		result.setMaximumPatronagesBudgetByStats(mapMaximumPD);
+		result.setRatioChimpumByCurrency(ratioChBC);
+		result.setAverageChimpumByCurrency(avrChBC);
+		result.setDeviationChimpumByCurrency(dvaChBC);
+		result.setMinimumChimpumByCurrency(minChBC);
+		result.setMaximumChimpumByCurrency(maxChBC);
 		return result;
 	}
-	
-
 }
-
-

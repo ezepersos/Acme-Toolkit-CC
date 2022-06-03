@@ -29,3 +29,9 @@ administrator.dashboard.form.label.minimum-retail-price = Minimum budget patrona
 administrator.dashboard.form.label.maximum-retail-price = Maximum budget patronage
 administrator.dashboard.form.label.number.patronages = Patronage's number
 administrator.dashboard.form.description-table = Control panel data
+
+administrator.dashboard.form.label.ratio-chimpum = Chimpum ratio
+administrator.dashboard.form.label.average-chimpum = Chimpum average
+administrator.dashboard.form.label.deviation-chimpum = Chimpum deviation
+administrator.dashboard.form.label.maximum-budget-chimpum = Maximum chimpum budget
+administrator.dashboard.form.label.minimum-budget-chimpum = Minimum chimpum budget
